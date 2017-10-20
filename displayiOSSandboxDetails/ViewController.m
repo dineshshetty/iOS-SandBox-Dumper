@@ -59,21 +59,28 @@
 - (void)showInstalledApplications {
     
     // This function updates the UI Picker with the list of all the applications installed on the device (System + User)
+    //
     
-    stringArray = [[NSMutableArray alloc] init];
+    stringArrayAppName = [[NSMutableArray alloc] init];
+    stringArrayAppid = [[NSMutableArray alloc] init];
+
 
     Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
     NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
     for (LSApplicationProxy *apps in [workspace performSelector:@selector(allApplications)])
     {
         NSString *localizedApplicationName = apps.localizedName;
-        [stringArray addObject:localizedApplicationName];
-        
+        //Use NSString *localizedApplicationName = apps.applicationIdentifier to use application identifiers in Picker
+        [stringArrayAppName addObject:localizedApplicationName];
+        [stringArrayAppid addObject:apps.applicationIdentifier];
     }
  //   NSLog(@"%@",stringArray);
     
-    NSMutableArray *dataTest = [[NSMutableArray alloc] initWithArray:stringArray];
-    _dataSourceArray =  dataTest;
+    NSMutableArray *appNamesData = [[NSMutableArray alloc] initWithArray:stringArrayAppName];
+    _dataSourceArray =  appNamesData;
+    
+    NSMutableArray *appIdData = [[NSMutableArray alloc] initWithArray:stringArrayAppid];
+    _dataSourceAppIdArray =  appIdData;
     
     self.app_picker.dataSource = self;
     self.app_picker.delegate = self;
@@ -85,6 +92,6 @@
 - (IBAction)view_sandbox_button:(id)sender {
 
     NSLog(@"Button Pressed");
-    NSLog(@" You Selected: %@", _dataSourceArray[selectedRow]);
+    NSLog(@" You Selected the application %@ with appId %@ ", _dataSourceArray[selectedRow], _dataSourceAppIdArray[selectedRow]);
 }
 @end
