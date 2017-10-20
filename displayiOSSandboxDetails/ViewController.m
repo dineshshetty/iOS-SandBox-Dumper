@@ -89,17 +89,88 @@
 }
 
 - (NSMutableDictionary*)getApplicationSandboxDetails {
+    NSDictionary *appBundleInformation = nil;
+    NSMutableDictionary *all_apps = [NSMutableDictionary new];
+
+    
+    Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
+    NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
+    for (FBApplicationInfo *apps in [workspace performSelector:@selector(allApplications)])
+    {
+        NSString *appName = ((LSApplicationProxy*)apps).itemName;
+        if (!appName)
+        {
+            appName = ((LSApplicationProxy*)apps).localizedName;
+        }
+        
+
+        NSString *minimumSupportedOS = ((LSApplicationProxy*)apps).minimumSystemVersion;
+        if (!minimumSupportedOS)
+        {
+            minimumSupportedOS = @"";
+        }
+        
+        NSString *appTeamID = ((LSApplicationProxy*)apps).teamID;
+        if (!appTeamID)
+        {
+            appTeamID = @"";
+        }
+        
+        //Using Absolute to fix Invalid type in JSON write (NSURL) error - http://www.itgo.me/a/x4350498357866144658/json-string-from-nsdictionary-having-file-path
+        
+        NSString *absoluteBundleIdentifier = @"";
+        if (apps.bundleIdentifier)
+        {
+            absoluteBundleIdentifier = apps.bundleIdentifier ;
+            
+        }
+        
+        NSString *absoluteBundleURL = @"";
+        if (apps.bundleURL)
+        {
+            absoluteBundleURL = [apps.bundleURL absoluteString];
+
+        }
+        
+        NSString *absoluteBundleContainerURL = @"";
+        if (apps.bundleContainerURL)
+        {
+            absoluteBundleContainerURL = [apps.bundleContainerURL absoluteString];
+        }
+        
+        NSString *absoluteDataContainerURL = @"";
+        if (apps.dataContainerURL)
+        {
+            absoluteDataContainerURL = [apps.dataContainerURL absoluteString];
+        }
+        
+ 
+        appBundleInformation = @{
+                       @"DisplayName": appName,
+                       @"MinSdkVersion": minimumSupportedOS,
+                       @"TeamID" : appTeamID,
+                       @"BundleIdentifier": absoluteBundleIdentifier,
+                       @"BundleURL":absoluteBundleURL,
+                       @"BundleContainer":absoluteBundleContainerURL,
+                       @"DataContainer": absoluteDataContainerURL,
+                       };
+    
+        all_apps[apps.bundleIdentifier] = appBundleInformation;
+
+
+    }
+    
     return all_apps;
 }
 
 
 - (IBAction)view_sandbox_button:(id)sender {
 
-    NSLog(@"Button Pressed");
     NSLog(@" You Selected the application %@ with appId %@ ", _dataSourceArray[selectedRow], _dataSourceAppIdArray[selectedRow]);
     
-    //display single sandbox
     NSMutableDictionary *all_apps =[self getApplicationSandboxDetails];
+    NSDictionary* dictSelectedAppBundleInfo= all_apps[_dataSourceAppIdArray[selectedRow]];
+    NSLog(@"%@",dictSelectedAppBundleInfo);
     
     
     
