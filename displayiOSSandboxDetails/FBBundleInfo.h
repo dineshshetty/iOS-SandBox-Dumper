@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSDictionary *extendedInfo;
 @property (nonatomic) NSUInteger sequenceNumber;
 
+
 - (instancetype)_initWithApplicationProxy:(LSApplicationProxy *)proxy;
 - (instancetype)_initWithBundleURL:(NSURL *)url;
 

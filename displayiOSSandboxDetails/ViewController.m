@@ -95,6 +95,8 @@
     
     Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
     NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
+    
+    
     for (FBApplicationInfo *apps in [workspace performSelector:@selector(allApplications)])
     {
         NSString *appName = ((LSApplicationProxy*)apps).itemName;
