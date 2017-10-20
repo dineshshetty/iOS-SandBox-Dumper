@@ -33,6 +33,7 @@
 @property (strong, nonatomic)NSArray *completeAppList;
 
 - (IBAction)view_sandbox_button:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextView *textview_sandbox_data_display;
 
 
 @end

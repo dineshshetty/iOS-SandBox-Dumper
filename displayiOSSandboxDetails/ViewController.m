@@ -165,6 +165,16 @@
     return all_apps;
 }
 
+- (void)sandBoxDataDisplay:(NSString *)text {
+    // NSLog(@"In debugPrint = %@", text);
+    
+    [_textview_sandbox_data_display
+     setText:text];
+}
+
+
+
+
 
 - (IBAction)view_sandbox_button:(id)sender {
 
@@ -173,6 +183,8 @@
     NSMutableDictionary *all_apps =[self getApplicationSandboxDetails];
     NSDictionary* dictSelectedAppBundleInfo= all_apps[_dataSourceAppIdArray[selectedRow]];
     NSLog(@"%@",dictSelectedAppBundleInfo);
+    
+     [self sandBoxDataDisplay:[NSString stringWithFormat:@"Sent:%@",dictSelectedAppBundleInfo]];
     
     
     
