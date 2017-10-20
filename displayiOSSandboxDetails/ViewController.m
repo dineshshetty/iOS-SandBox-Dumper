@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "LSApplicationProxy.h"
+
 
 @interface ViewController ()
 
@@ -88,10 +88,20 @@
 
 }
 
+- (NSMutableDictionary*)getApplicationSandboxDetails {
+    return all_apps;
+}
+
 
 - (IBAction)view_sandbox_button:(id)sender {
 
     NSLog(@"Button Pressed");
     NSLog(@" You Selected the application %@ with appId %@ ", _dataSourceArray[selectedRow], _dataSourceAppIdArray[selectedRow]);
+    
+    //display single sandbox
+    NSMutableDictionary *all_apps =[self getApplicationSandboxDetails];
+    
+    
+    
 }
 @end

@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h> //added to provide declaration for objc_getClass
+#import "LSApplicationProxy.h"
 
 
 @interface ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>{
     NSMutableArray *stringArrayAppName;
     NSMutableArray *stringArrayAppid;
     NSInteger selectedRow;
+    NSMutableDictionary *all_apps;
+    LSApplicationProxy *apps;
+
     
     
 }

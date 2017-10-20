@@ -27,6 +27,8 @@
 		EAEAE1031F9A7BCC001C4DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAEAE1051F9A7BCC001C4DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAEAE10B1F9A827D001C4DFB /* LSApplicationProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSApplicationProxy.h; sourceTree = "<group>"; };
+		EAEAE10D1F9A8C47001C4DFB /* FBApplicationInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBApplicationInfo.h; sourceTree = "<group>"; };
+		EAEAE10E1F9A8C6C001C4DFB /* FBBundleInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBBundleInfo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +86,9 @@
 		EAEAE10C1F9A85A0001C4DFB /* PrivateHeaders */ = {
 			isa = PBXGroup;
 			children = (
+				EAEAE10D1F9A8C47001C4DFB /* FBApplicationInfo.h */,
 				EAEAE10B1F9A827D001C4DFB /* LSApplicationProxy.h */,
+				EAEAE10E1F9A8C6C001C4DFB /* FBBundleInfo.h */,
 			);
 			name = PrivateHeaders;
 			sourceTree = "<group>";
