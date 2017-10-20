@@ -26,6 +26,7 @@
 		EAEAE1001F9A7BCC001C4DFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAEAE1031F9A7BCC001C4DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAEAE1051F9A7BCC001C4DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAEAE10B1F9A827D001C4DFB /* LSApplicationProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSApplicationProxy.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +68,7 @@
 				EAEAE1021F9A7BCC001C4DFB /* LaunchScreen.storyboard */,
 				EAEAE1051F9A7BCC001C4DFB /* Info.plist */,
 				EAEAE0F41F9A7BCC001C4DFB /* Supporting Files */,
+				EAEAE10C1F9A85A0001C4DFB /* PrivateHeaders */,
 			);
 			path = displayiOSSandboxDetails;
 			sourceTree = "<group>";
@@ -77,6 +79,14 @@
 				EAEAE0F51F9A7BCC001C4DFB /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAEAE10C1F9A85A0001C4DFB /* PrivateHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				EAEAE10B1F9A827D001C4DFB /* LSApplicationProxy.h */,
+			);
+			name = PrivateHeaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

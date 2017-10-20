@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "LSApplicationProxy.h"
 
 @interface ViewController ()
 
@@ -17,9 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _dataSourceArray = @[@"PickerValueRowOne", @"PickerValueRowTwo", @"PickerValueRowThree", @"PickerValueRowFour"];
-    self.app_picker.dataSource = self;
-    self.app_picker.delegate = self;
+
+    
+    [self showInstalledApplications];
     
 }
 
@@ -55,6 +56,30 @@
     
 }
 
+- (void)showInstalledApplications {
+    
+    // This function updates the UI Picker with the list of all the applications installed on the device (System + User)
+    
+    stringArray = [[NSMutableArray alloc] init];
+
+    Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
+    NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
+    for (LSApplicationProxy *apps in [workspace performSelector:@selector(allApplications)])
+    {
+        NSString *localizedApplicationName = apps.localizedName;
+        [stringArray addObject:localizedApplicationName];
+        
+    }
+ //   NSLog(@"%@",stringArray);
+    
+    NSMutableArray *dataTest = [[NSMutableArray alloc] initWithArray:stringArray];
+    _dataSourceArray =  dataTest;
+    
+    self.app_picker.dataSource = self;
+    self.app_picker.delegate = self;
+    
+
+}
 
 
 - (IBAction)view_sandbox_button:(id)sender {
