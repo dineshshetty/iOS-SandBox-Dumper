@@ -159,7 +159,6 @@
     
         all_apps[apps.bundleIdentifier] = appBundleInformation;
 
-
     }
     
     return all_apps;
