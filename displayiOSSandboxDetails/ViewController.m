@@ -184,9 +184,14 @@
     NSDictionary* dictSelectedAppBundleInfo= all_apps[_dataSourceAppIdArray[selectedRow]];
     NSLog(@"%@",dictSelectedAppBundleInfo);
     
-     [self sandBoxDataDisplay:[NSString stringWithFormat:@"Sent:%@",dictSelectedAppBundleInfo]];
+     [self sandBoxDataDisplay:[NSString stringWithFormat:@"Details:%@",dictSelectedAppBundleInfo]];
     
     
     
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [[self view] endEditing:YES];
 }
 @end
