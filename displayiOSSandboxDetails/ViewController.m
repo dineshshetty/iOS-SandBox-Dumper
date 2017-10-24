@@ -7,23 +7,15 @@
 //
 
 #import "ViewController.h"
-#include <sys/utsname.h>
-
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
-struct utsname unamer = { 0 };
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    uname(&unamer);
-    NSLog([NSString stringWithUTF8String:unamer.version]);
-
-
-    
     [self showInstalledApplications];
     
 }
