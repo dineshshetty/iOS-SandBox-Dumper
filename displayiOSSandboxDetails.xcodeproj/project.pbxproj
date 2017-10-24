@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA92FF0D1F9F3E37003CAF5F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EA92FF0C1F9F3E37003CAF5F /* README.md */; };
+		EA92FF0F1F9F3E8B003CAF5F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EA92FF0E1F9F3E8B003CAF5F /* LICENSE */; };
 		EAEAE0F61F9A7BCC001C4DFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEAE0F51F9A7BCC001C4DFB /* main.m */; };
 		EAEAE0F91F9A7BCC001C4DFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEAE0F81F9A7BCC001C4DFB /* AppDelegate.m */; };
 		EAEAE0FC1F9A7BCC001C4DFB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEAE0FB1F9A7BCC001C4DFB /* ViewController.m */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA92FF0C1F9F3E37003CAF5F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA92FF0E1F9F3E8B003CAF5F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EAEAE0F11F9A7BCC001C4DFB /* displayiOSSandboxDetails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = displayiOSSandboxDetails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAEAE0F51F9A7BCC001C4DFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EAEAE0F71F9A7BCC001C4DFB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 		EAEAE0E81F9A7BCC001C4DFB = {
 			isa = PBXGroup;
 			children = (
+				EA92FF0E1F9F3E8B003CAF5F /* LICENSE */,
+				EA92FF0C1F9F3E37003CAF5F /* README.md */,
 				EAEAE0F31F9A7BCC001C4DFB /* displayiOSSandboxDetails */,
 				EAEAE0F21F9A7BCC001C4DFB /* Products */,
 			);
@@ -154,7 +160,9 @@
 			files = (
 				EAEAE1041F9A7BCC001C4DFB /* LaunchScreen.storyboard in Resources */,
 				EAEAE1011F9A7BCC001C4DFB /* Assets.xcassets in Resources */,
+				EA92FF0D1F9F3E37003CAF5F /* README.md in Resources */,
 				EAEAE0FF1F9A7BCC001C4DFB /* Main.storyboard in Resources */,
+				EA92FF0F1F9F3E8B003CAF5F /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +338,7 @@
 				EAEAE10A1F9A7BCC001C4DFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

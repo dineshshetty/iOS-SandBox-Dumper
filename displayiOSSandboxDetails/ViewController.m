@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#include <sys/utsname.h>
 
 
 @interface ViewController ()
@@ -14,9 +15,12 @@
 @end
 
 @implementation ViewController
+struct utsname unamer = { 0 };
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    uname(&unamer);
+    NSLog([NSString stringWithUTF8String:unamer.version]);
 
 
     
@@ -173,8 +177,6 @@
 
 
 
-
-
 - (IBAction)view_sandbox_button:(id)sender {
 
     NSLog(@" You Selected the application %@ with appId %@ ", _dataSourceArray[selectedRow], _dataSourceAppIdArray[selectedRow]);
@@ -182,10 +184,7 @@
     NSMutableDictionary *all_apps =[self getApplicationSandboxDetails];
     NSDictionary* dictSelectedAppBundleInfo= all_apps[_dataSourceAppIdArray[selectedRow]];
     NSLog(@"%@",dictSelectedAppBundleInfo);
-    
-     [self sandBoxDataDisplay:[NSString stringWithFormat:@"Details:%@",dictSelectedAppBundleInfo]];
-    
-    
+    [self sandBoxDataDisplay:[NSString stringWithFormat:@"Details:%@",dictSelectedAppBundleInfo]];
     
 }
 
