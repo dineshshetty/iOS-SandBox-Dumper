@@ -10,8 +10,7 @@ These GUID values bear no indication of which application they belong to. You'll
 
 SandBox-Dumper makes use of multiple private libraries to provide exact locations of the application sandbox, application bundle and some other interesting information
 
-<img src="https://i.imgur.com/QyMu3Z5.png width="400" height="400">
-
+<img src="https://i.imgur.com/QyMu3Z5.png" height="400" width="400" >
 
 ToDo:
 Option to switch between User and System applications
