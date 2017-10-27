@@ -67,8 +67,12 @@
     {
         NSString *localizedApplicationName = apps.localizedName;
         //Use NSString *localizedApplicationName = apps.applicationIdentifier to use application identifiers in Picker
-        [stringArrayAppName addObject:localizedApplicationName];
-        [stringArrayAppid addObject:apps.applicationIdentifier];
+        NSString *applicationIdentifier = apps.applicationIdentifier;
+        if (localizedApplicationName && applicationIdentifier)
+        {
+            [stringArrayAppName addObject:localizedApplicationName];
+            [stringArrayAppid addObject:apps.applicationIdentifier];
+        }
     }
  //   NSLog(@"%@",stringArray);
     
@@ -142,7 +146,7 @@
             absoluteDataContainerURL = [apps.dataContainerURL absoluteString];
         }
         
- 
+        @try{
         appBundleInformation = @{
                        @"DisplayName": appName,
                        @"MinSdkVersion": minimumSupportedOS,
@@ -152,9 +156,12 @@
                        @"BundleContainer":absoluteBundleContainerURL,
                        @"DataContainer": absoluteDataContainerURL,
                        };
-    
-        all_apps[apps.bundleIdentifier] = appBundleInformation;
-
+        }@catch (NSException* e){
+            NSLog(@"Exception = %@", e);
+        }@finally {
+            all_apps[apps.bundleIdentifier] = appBundleInformation;
+        }
+        
     }
     
     return all_apps;
