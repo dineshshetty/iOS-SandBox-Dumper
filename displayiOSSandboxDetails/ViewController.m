@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "InfoTableViewCell.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSDictionary *selectedAppBundleInfo;
 
 @end
 
@@ -18,8 +22,11 @@
     [super viewDidLoad];
     [self showInstalledApplications];
     
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    [self.tableView registerNib:[InfoTableViewCell nib] forCellReuseIdentifier:[InfoTableViewCell identifier]];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -59,8 +66,8 @@
     
     stringArrayAppName = [[NSMutableArray alloc] init];
     stringArrayAppid = [[NSMutableArray alloc] init];
-
-
+    
+    
     Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
     NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
     for (LSApplicationProxy *apps in [workspace performSelector:@selector(allApplications)])
@@ -74,7 +81,6 @@
             [stringArrayAppid addObject:apps.applicationIdentifier];
         }
     }
- //   NSLog(@"%@",stringArray);
     
     NSMutableArray *appNamesData = [[NSMutableArray alloc] initWithArray:stringArrayAppName];
     _dataSourceArray =  appNamesData;
@@ -84,18 +90,15 @@
     
     self.app_picker.dataSource = self;
     self.app_picker.delegate = self;
-    
-
 }
 
 - (NSMutableDictionary*)getApplicationSandboxDetails {
     NSDictionary *appBundleInformation = nil;
     NSMutableDictionary *all_apps = [NSMutableDictionary new];
-
+    
     
     Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
     NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
-    
     
     for (FBApplicationInfo *apps in [workspace performSelector:@selector(allApplications)])
     {
@@ -105,7 +108,7 @@
             appName = ((LSApplicationProxy*)apps).localizedName;
         }
         
-
+        
         NSString *minimumSupportedOS = ((LSApplicationProxy*)apps).minimumSystemVersion;
         if (!minimumSupportedOS)
         {
@@ -131,7 +134,7 @@
         if (apps.bundleURL)
         {
             absoluteBundleURL = [apps.bundleURL absoluteString];
-
+            
         }
         
         NSString *absoluteBundleContainerURL = @"";
@@ -147,15 +150,15 @@
         }
         
         @try{
-        appBundleInformation = @{
-                       @"DisplayName": appName,
-                       @"MinSdkVersion": minimumSupportedOS,
-                       @"TeamID" : appTeamID,
-                       @"BundleIdentifier": absoluteBundleIdentifier,
-                       @"BundleURL":absoluteBundleURL,
-                       @"BundleContainer":absoluteBundleContainerURL,
-                       @"DataContainer": absoluteDataContainerURL,
-                       };
+            appBundleInformation = @{
+                                     @"DisplayName": appName,
+                                     @"MinSdkVersion": minimumSupportedOS,
+                                     @"TeamID" : appTeamID,
+                                     @"BundleIdentifier": absoluteBundleIdentifier,
+                                     @"BundleURL":absoluteBundleURL,
+                                     @"BundleContainer":absoluteBundleContainerURL,
+                                     @"DataContainer": absoluteDataContainerURL,
+                                     };
         }@catch (NSException* e){
             NSLog(@"Exception = %@", e);
         }@finally {
@@ -167,28 +170,51 @@
     return all_apps;
 }
 
-- (void)sandBoxDataDisplay:(NSString *)text {
-    // NSLog(@"In debugPrint = %@", text);
-    
-    [_textview_sandbox_data_display
-     setText:text];
-}
-
-
-
 - (IBAction)view_sandbox_button:(id)sender {
-
+    
     NSLog(@" You Selected the application %@ with appId %@ ", _dataSourceArray[selectedRow], _dataSourceAppIdArray[selectedRow]);
     
     NSMutableDictionary *all_apps =[self getApplicationSandboxDetails];
-    NSDictionary* dictSelectedAppBundleInfo= all_apps[_dataSourceAppIdArray[selectedRow]];
+    NSDictionary *dictSelectedAppBundleInfo = all_apps[_dataSourceAppIdArray[selectedRow]];
     NSLog(@"%@",dictSelectedAppBundleInfo);
-    [self sandBoxDataDisplay:[NSString stringWithFormat:@"Details:%@",dictSelectedAppBundleInfo]];
-    
+    self.selectedAppBundleInfo = dictSelectedAppBundleInfo;
+    [self.tableView reloadData];
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [[self view] endEditing:YES];
 }
+
+#pragma mark - <UITableViewDataSource>
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.selectedAppBundleInfo.allKeys.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *key = [self.selectedAppBundleInfo allKeys][indexPath.row];
+    NSString *info = self.selectedAppBundleInfo[key];
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Thin" size:20.0f]};
+    CGRect rect = [info boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.bounds), CGFLOAT_MAX)
+                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                  attributes:attributes
+                                     context:nil];
+    return MAX(rect.size.height,70.0);
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    InfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[InfoTableViewCell identifier]];
+    NSString *key = [self.selectedAppBundleInfo allKeys][indexPath.row];
+    
+    [cell configureWithTitle:key andInfo:self.selectedAppBundleInfo[key]];
+    return cell;
+}
+
+#pragma mark - <UITableViewDelegate>
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 @end
+
