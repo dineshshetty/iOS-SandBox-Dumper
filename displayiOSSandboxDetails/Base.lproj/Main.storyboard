@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,24 +33,19 @@
                                     <action selector="view_sandbox_button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pcr-Gc-Yra"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z1e-Se-7ic">
-                                <rect key="frame" x="0.0" y="362" width="375" height="305"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NSG-Tx-i3c">
+                                <rect key="frame" x="0.0" y="393" width="375" height="274"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="305" id="5QX-UI-aCY"/>
-                                </constraints>
-                            </tableView>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="z1e-Se-7ic" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iIm-ZN-rYg"/>
-                            <constraint firstAttribute="trailing" secondItem="z1e-Se-7ic" secondAttribute="trailing" id="ikR-D0-sTw"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="z1e-Se-7ic" secondAttribute="bottom" id="kyR-hA-9QH"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="app_picker" destination="Fgm-Da-5nZ" id="zDP-CE-K3K"/>
-                        <outlet property="tableView" destination="z1e-Se-7ic" id="7xe-ny-tEg"/>
+                        <outlet property="textview_sandbox_data_display" destination="NSG-Tx-i3c" id="lk2-bJ-piE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
