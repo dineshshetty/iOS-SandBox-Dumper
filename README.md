@@ -8,7 +8,7 @@ The location of the application data directory is /private/var/containers/Data/A
 
 These GUID values bear no indication of which application they belong to. You'll end up spending quite some time trying to figure out these GUID values every time you reinstall the application.
 
-SandBox-Dumper makes use of multiple private libraries to provide exact locations of the application sandbox, application bundle and some other interesting information. It should support iOS devices (jailbroken/non-jailbroken) running iOS version lower than iOS 11. Confirmed to be working on jailbroken iOS 13.2.2 device too!
+SandBox-Dumper makes use of multiple private libraries to provide exact locations of the application sandbox, application bundle and some other interesting information. It should work on all the latest iOS versions. (Confirmed to be working on jailbroken iOS 14.2 device)
 
 <img src="https://i.imgur.com/QyMu3Z5.png" height="400" width="300" >
 
